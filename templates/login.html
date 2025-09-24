@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+  <h2>Login</h2>
+
+  <div class="login-grid">
+    <div class="panel">
+      <h3>Admin Login</h3>
+      <form method="POST">
+        <input type="hidden" name="role" value="admin">
+        <input name="username" placeholder="admin username" required>
+        <input name="password" type="password" placeholder="password" required>
+        <button class="btn">Admin Login</button>
+      </form>
+    </div>
+
+    <div class="panel">
+      <h3>Student Login</h3>
+      <form method="POST">
+        <input type="hidden" name="role" value="student">
+        <input name="roll_no" placeholder="Roll Number" required>
+        <input name="password" type="password" placeholder="password" required>
+        <button class="btn">Student Login</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

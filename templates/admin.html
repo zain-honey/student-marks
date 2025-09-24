@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Admin Dashboard</h2>
+
+<section class="admin-grid">
+  <div class="card">
+    <h3>Add Student</h3>
+    <form action="{{ url_for('admin_add_student') }}" method="post" enctype="multipart/form-data">
+      <input name="roll_no" placeholder="Roll no" required>
+      <input name="name" placeholder="Name" required>
+      <input name="father_name" placeholder="Father name">
+      <input name="dob" placeholder="DOB (YYYY-MM-DD)">
+      <input name="class_name" placeholder="Class">
+      <input type="file" name="image" accept="image/*">
+      <input name="password" placeholder="password (optional)">
+      <button class="btn">Add Student</button>
+    </form>
+  </div>
+
+  <div class="card">
+    <h3>Add Subject</h3>
+    <form action="{{ url_for('admin_add_subject') }}" method="post">
+      <input name="subject_name" placeholder="Subject name" required>
+      <button class="btn">Add Subject</button>
+    </form>
+
+    <hr>
+    <h3>Export</h3>
+    <a class="btn" href="{{ url_for('admin_export_csv') }}">Download CSV</a>
+  </div>
+</section>
+
+<section class="lists">
+  <div class="card wide">
+    <h3>Students</h3>
+    <table class="stripe">
+      <thead><tr><th>Roll</th><th>Name</th><th>Class</th><th>Image</th><th>Actions</th></tr></thead>
+      <tbody>
+      {% for s in students %}
+        <tr>
+          <td>{{ s.roll_no }}</td>
+          <td>{{ s.name }}</td>
+          <td>{{ s.class_name }}</td>
+          <td>
+            {% if s.image %}
+              <img src="{{ url_for('static', filename='uploads/' + s.image) }}" class="thumb">
+            {% endif %}
+          </td>
+          <td>
+            <form style="display:inline" action="{{ url_for('admin_delete_student', sid=s.id) }}" method="post" onsubmit="return confirm('Delete student?');">
+              <button class="btn small danger">Delete</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card wide">
+    <h3>Subjects & Marks</h3>
+    <form action="{{ url_for('admin_save_mark') }}" method="post">
+      <label>Student</label>
+      <select name="student_id" required>
+        {% for s in students %}<option value="{{ s.id }}">{{ s.roll_no }} - {{ s.name }}</option>{% endfor %}
+      </select>
+      <label>Subject</label>
+      <select name="subject_id" required>
+        {% for sub in subjects %}<option value="{{ sub.id }}">{{ sub.name }}</option>{% endfor %}
+      </select>
+      <label>Marks (0-100)</label>
+      <input name="marks" placeholder="e.g. 85" required>
+      <button class="btn">Save Mark</button>
+    </form>
+
+    <hr>
+    <h4>All Marks</h4>
+    <table class="stripe small-table">
+      <thead><tr><th>Roll</th><th>Student</th><th>Subject</th><th>Marks</th></tr></thead>
+      <tbody>
+        {% for m in marks %}
+          <tr>
+            <td>{{ m.student.roll_no }}</td>
+            <td>{{ m.student.name }}</td>
+            <td>{{ m.subject.name }}</td>
+            <td>{{ m.marks }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+{% endblock %}

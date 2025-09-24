@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <div class="hero-card">
+    <h1>Futuristic Student Marks Portal</h1>
+    <p>Online access for students & admin. View marks, manage students & subjects.</p>
+    <div class="hero-actions">
+      <a class="btn" href="{{ url_for('login') }}">Login</a>
+      {% if session.get('role') == 'admin' %}
+        <a class="btn alt" href="{{ url_for('admin_dashboard') }}">Go to Admin</a>
+      {% endif %}
+    </div>
+  </div>
+  <div class="hero-art">
+    <img src="{{ url_for('static', filename='uploads/placeholder.png') }}" alt="" style="max-width:220px;opacity:.6">
+  </div>
+</section>
+{% endblock %}

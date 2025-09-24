@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Student Dashboard</h2>
+<div class="card profile">
+  <div class="left">
+    {% if student.image %}
+      <img src="{{ url_for('static', filename='uploads/' + student.image) }}" class="profile-pic">
+    {% endif %}
+  </div>
+  <div class="right">
+    <h3>{{ student.name }}</h3>
+    <p><strong>Roll:</strong> {{ student.roll_no }}</p>
+    <p><strong>Class:</strong> {{ student.class_name }}</p>
+    <p><strong>Father:</strong> {{ student.father_name }}</p>
+    <p><strong>DOB:</strong> {{ student.dob }}</p>
+  </div>
+</div>
+
+<div class="card">
+  <h3>Your Marks</h3>
+  <table class="stripe">
+    <thead><tr><th>Subject</th><th>Marks</th></tr></thead>
+    <tbody>
+      {% for m in marks %}
+        <tr><td>{{ m.subject.name }}</td><td>{{ m.marks }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  {% if percentage %}
+    <p class="big">Percentage: <strong>{{ '%.2f'|format(percentage) }}%</strong></p>
+  {% endif %}
+</div>
+
+<div class="card">
+  <h3>Change Password</h3>
+  <form action="{{ url_for('student_change_password') }}" method="post">
+    <input name="old_password" type="password" placeholder="Old password" required>
+    <input name="new_password" type="password" placeholder="New password" required>
+    <button class="btn">Change Password</button>
+  </form>
+</div>
+{% endblock %}

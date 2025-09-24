@@ -1,0 +1,60 @@
+:root{
+  --bg:#071426;
+  --card:#0b1b2b;
+  --accent:#39ffca;
+  --muted:#9fb3c8;
+  --glass: rgba(255,255,255,0.03);
+  --danger:#ff5c66;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Inter, Arial, Helvetica, sans-serif;
+  background: linear-gradient(180deg,#020812 0%, #071426 100%);
+  color:#d8eef1;
+  min-height:100vh;
+}
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 24px;
+  background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+.brand{font-weight:700; color:var(--accent); letter-spacing:0.6px}
+.links a{color:var(--muted); margin-left:12px; text-decoration:none}
+.container{max-width:1100px; margin:26px auto; padding:0 18px}
+
+.hero{display:flex; gap:24px; align-items:center; margin-bottom:18px}
+.hero-card{flex:1; background:var(--card); padding:28px; border-radius:14px; box-shadow:0 8px 30px rgba(0,0,0,.6)}
+.hero-card h1{margin:0 0 8px 0; color:var(--accent)}
+.hero-actions .btn{margin-right:8px}
+
+.card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:16px; border-radius:12px; margin-bottom:18px}
+.admin-grid{display:flex; gap:18px; margin-bottom:18px}
+.admin-grid .card{flex:1}
+
+input, select {width:100%; padding:10px; margin:8px 0 12px 0; border-radius:8px; border:1px solid rgba(255,255,255,0.04); background:var(--glass); color:inherit}
+.btn{background:linear-gradient(90deg,var(--accent), #7ef1d1); border:none; color:#00161a; padding:10px 14px; border-radius:10px; cursor:pointer; font-weight:700}
+.btn.alt{background:transparent; color:var(--muted); border:1px solid rgba(255,255,255,0.03)}
+.btn.small{padding:6px 8px;font-size:0.9rem}
+.btn.danger, .danger{background:var(--danger); color:#fff}
+
+.stripe{width:100%; border-collapse:collapse}
+.stripe th, .stripe td{padding:8px 10px; text-align:left; border-bottom:1px solid rgba(255,255,255,0.03)}
+.small-table td{font-size:.95rem}
+.thumb{width:48px;height:48px; object-fit:cover; border-radius:6px}
+.profile{display:flex; gap:18px; align-items:center}
+.profile-pic{width:120px; height:120px; border-radius:10px; object-fit:cover}
+.big{font-size:1.2rem; margin-top:12px}
+
+.flash-area{margin-bottom:12px}
+.flash{padding:10px;border-radius:8px;margin-bottom:8px}
+.flash.success{background:rgba(57,255,202,0.12); color:var(--accent)}
+.flash.danger{background:rgba(255,92,102,0.06); color:var(--danger)}
+
+@media (max-width:900px){
+  .admin-grid{flex-direction:column}
+  .hero{flex-direction:column}
+}
