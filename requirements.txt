@@ -3,3 +3,8 @@ Flask_SQLAlchemy
 Werkzeug
 gunicorn
 python-dotenv
+Flask
+Flask-SQLAlchemy
+gunicorn
+python-dotenv
+Werkzeug
